@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "793bf228-6eb4-497b-9859-355a2251ab4a",
+		"name": "IngestAPI-Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test Date Validation - Good modified",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"InvoiceNo\":536365,\"StockCode\":\"85123A\",\"Description\":\"WHITE HANGING HEART T-LIGHT HOLDER\",\"Quantity\":6,\"InvoiceDate\":\"12/02/2010 8:26\",\"UnitPrice\":2.55,\"CustomerID\":17850,\"Country\":\"United Kingdom\"}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/invoiceitem",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"invoiceitem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Date Validation - Good original",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"InvoiceNo\":536365,\"StockCode\":\"85123A\",\"Description\":\"WHITE HANGING HEART T-LIGHT HOLDER\",\"Quantity\":6,\"InvoiceDate\":\"12/2/2010 8:26\",\"UnitPrice\":2.55,\"CustomerID\":17850,\"Country\":\"United Kingdom\"}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/invoiceitem",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"invoiceitem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test Date Validation - Bad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"InvoiceNo\":536365,\"StockCode\":\"85123A\",\"Description\":\"WHITE HANGING HEART T-LIGHT HOLDER\",\"Quantity\":6,\"InvoiceDate\":\"12/2/2010 8:26232sa\",\"UnitPrice\":2.55,\"CustomerID\":17850,\"Country\":\"United Kingdom\"}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/invoiceitem",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"invoiceitem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test invoiceno Validation - Bad Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"InvoiceNo\":\"536365abc\",\"StockCode\":\"85123A\",\"Description\":\"WHITE HANGING HEART T-LIGHT HOLDER\",\"Quantity\":6,\"InvoiceDate\":\"12/2/2010 8:26\",\"UnitPrice\":2.55,\"CustomerID\":17850,\"Country\":\"United Kingdom\"}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/invoiceitem",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"invoiceitem"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
