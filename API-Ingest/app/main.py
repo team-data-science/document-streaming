@@ -1,6 +1,6 @@
 # You need this to use FastAPI, work with statuses and be able to end HTTPExceptions
 from fastapi import FastAPI, status, HTTPException
-
+ 
 # You need this to be able to turn classes into JSONs and return
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse

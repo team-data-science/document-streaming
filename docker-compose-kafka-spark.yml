@@ -26,14 +26,16 @@ services:
       - document-streaming
 
   spark:
-    image: 'jupyter/pyspark-notebook'
+    image: 'jupyter/pyspark-notebook:spark-2'
     ports:
       - '8888:8888'
+      - "4040-4080:4040-4080"
     volumes:
       - ./ApacheSpark/:/home/jovyan/work
     networks:
       - document-streaming
-
+    links:
+      - "kafka:kafka-server" #allows spark notebook to discover kafka service by name "kafka-server"
 networks:
   document-streaming:
     driver: bridge
