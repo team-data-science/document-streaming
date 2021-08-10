@@ -1,104 +1,58 @@
 from numpy import double
 import streamlit as st
 import pandas as pd
+from pandas import DataFrame
+
 import numpy as np
 
-# create a function that will load the csv data, will be cached if nothing changes
-@st.cache
-def loaddata():
-    data = pd.read_csv("data.csv")
-    return data
+import pymongo
 
-# create empty dataframe
-# mydata = pd.DataFrame()
 
-# fill it fom the file
-mydata = loaddata()
+#data = pd.read_csv("data.csv")
+myclient = pymongo.MongoClient("mongodb://localhost:27017/",username='root',password='example')
+mydb = myclient["docstreaming"]
+mycol = mydb["invoices"] 
 
-# Create a first table with a first overview of the data
-# Only 20 rows
-st.header("Your Data")
-table = st.dataframe(data=mydata.head(20))
 
 # Below the fist chart add a input field for the invoice number
-inv_no = st.text_input("InvoiceNo:")
+cust_id = st.sidebar.text_input("CustomerID:")
+#st.text(inv_no)  # Use this to print out the content of the input field
+
+# if enter has been used on the input field 
+if cust_id:
+
+    myquery = {"CustomerID": cust_id}
+    # only includes or excludes
+    mydoc = mycol.find( myquery , { "_id": 0, "StockCode": 0, "Description": 0, "Quantity": 0, "Country": 0, "UnitPrice": 0})
+
+    # create dataframe from resulting documents to use drop_duplicates
+    df = DataFrame(mydoc)
+    
+    # drop duplicates, but keep the first one
+    df.drop_duplicates(subset ="InvoiceNo", keep = 'first', inplace = True)
+
+    # Add the table with a headline
+    st.header("Output Customer Invoices")
+    table2 = st.dataframe(data=df) 
+    
+
+# Below the fist chart add a input field for the invoice number
+inv_no = st.sidebar.text_input("InvoiceNo:")
 #st.text(inv_no)  # Use this to print out the content of the input field
 
 # if enter has been used on the input field 
 if inv_no:
     
-    # Filter the dataset by the invoice number
-    reduced = mydata[mydata["InvoiceNo"] == inv_no]
-    
-    # Print out the number of found rows
-    st.text(len(reduced.index))
+    myquery = {"InvoiceNo": inv_no}
+    mydoc = mycol.find( myquery, { "_id": 0, "InvoiceDate": 0, "Country": 0, "CustomerID": 0 })
+
+    # create the dataframe
+    df = DataFrame(mydoc)
+
+    # reindex it so that the columns are order lexicographically 
+    reindexed = df.reindex(sorted(df.columns), axis=1)
 
     # Add the table with a headline
     st.header("Output by Invoice ID")
-    table2 = st.dataframe(data=reduced.head(20))    
+    table2 = st.dataframe(data=reindexed) 
     
-# Do the same for the customer as with the invoices below.
-# Just display the input field in the sidebar
-cust_id = st.sidebar.text_input("CustomerID:")
-
-if cust_id:
-    reduced_cust = mydata[mydata["CustomerID"] == int(cust_id)]
-
-    st.header("Output by Customer ID")
-    table3 = st.dataframe(data=reduced_cust.head(20))
-
-
-# Create a price slider in the sidebar that will modify a table
-slide = st.sidebar.slider('Select min price of item', min_value=0.0, max_value=10000.0, step=0.1)
-
-if slide:
-    reduced_cust = mydata[mydata["UnitPrice"] >= slide]
-
-    st.header("Price based on slider")
-    table4 = st.dataframe(data=reduced_cust.head(20))
-
-
-
-
-
-
-
-
-
-
-
-
-
-# st.title('Load the data')
-# if st.sidebar.button('Load'):
-#     mydata = loaddata()
-
-#     table = st.dataframe(data=mydata)
-    
-#     inv_no = st.sidebar.text_input("InvoiceNo:")
-#     #if inv_no:
-#     reduced = mydata[mydata["InvoiceNo"] == inv_no]
-#     #reduced = data["InvoiceNo"]
-#     table2 = st.dataframe(reduced)    
- 
-# else:
-#     st.write('No Data Loaded')
-
-    
-
-
-
-
-
-# # Add a selectbox to the sidebar:
-# add_selectbox = st.sidebar.selectbox(
-#     'How would you like to be contacted?',
-#     ('Email', 'Home phone', 'Mobile phone')
-# )
-#
-# # Add a slider to the sidebar:
-# add_slider = st.sidebar.slider(
-#     'Select a range of values',
-#     0.0, 100.0, (25.0, 75.0)
-# )
-
