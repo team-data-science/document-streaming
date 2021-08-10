@@ -39,7 +39,7 @@ async def root():
 # Add a new invoice
 @app.post("/invoiceitem")
 async def post_invoice_item(item: InvoiceItem): #body awaits a json with invoice item information
-
+    print("Message received")
     try:
         # Evaluate the timestamp and parse it to datetime object you can work with
         date = datetime.strptime(item.InvoiceDate, "%d/%m/%Y %H:%M")
@@ -72,8 +72,8 @@ async def post_invoice_item(item: InvoiceItem): #body awaits a json with invoice
 
 def produce_kafka_string(json_as_string):
     # Create producer
-        producer = KafkaProducer(bootstrap_servers='localhost:9092')
+        producer = KafkaProducer(bootstrap_servers='kafka:9092',acks=1)
         
         # Write the string as bytes because Kafka needs it this way
         producer.send('ingestion-topic', bytes(json_as_string, 'utf-8'))
-        producer.flush()
+        producer.flush() 

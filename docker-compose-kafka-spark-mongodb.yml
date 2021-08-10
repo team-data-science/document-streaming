@@ -44,6 +44,40 @@ services:
     networks:
       - document-streaming
 
+  mongo:
+    container_name: mongo-dev
+    image: mongo
+    volumes:
+      - ~/dockerdata/mongodb:/data/db    
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: auth
+    networks:
+      - document-streaming
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo-dev
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: tribes
+    networks:
+      - document-streaming
+    depends_on:
+      - mongo
+
+
+
+
 networks:
   document-streaming:
     driver: bridge

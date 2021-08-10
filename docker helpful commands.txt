@@ -1,0 +1,5 @@
+docker inspect document-streaming_spark_1 
+
+
+    links:
+      - "kafka:kafka-server" #allows API to discover kafka service by name "kafka-server"
