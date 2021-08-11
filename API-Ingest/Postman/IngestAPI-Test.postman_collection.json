@@ -112,6 +112,60 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Docker container test 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"InvoiceNo\":536365,\"StockCode\":\"85123A\",\"Description\":\"WHITE HANGING HEART T-LIGHT HOLDER\",\"Quantity\":6,\"InvoiceDate\":\"12/02/2010 8:26\",\"UnitPrice\":2.55,\"CustomerID\":17850,\"Country\":\"United Kingdom\"}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/invoiceitem",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"invoiceitem"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Docker container test 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"InvoiceNo\":536365,\"StockCode\":\"85123A\",\"Description\":\"WHITE HANGING HEART T-LIGHT HOLDER\",\"Quantity\":6,\"InvoiceDate\":\"12/02/2010 8:26\",\"UnitPrice\":2.55,\"CustomerID\":17850,\"Country\":\"United Kingdom\"}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8000/invoiceitem",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"invoiceitem"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
