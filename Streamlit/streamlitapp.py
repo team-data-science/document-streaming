@@ -1,6 +1,5 @@
 from numpy import double
 import streamlit as st
-import pandas as pd
 from pandas import DataFrame
 
 import numpy as np
@@ -55,4 +54,5 @@ if inv_no:
     # Add the table with a headline
     st.header("Output by Invoice ID")
     table2 = st.dataframe(data=reindexed) 
-    
+
+
