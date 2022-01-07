@@ -72,7 +72,7 @@ async def post_invoice_item(item: InvoiceItem): #body awaits a json with invoice
 
 def produce_kafka_string(json_as_string):
     # Create producer
-        producer = KafkaProducer(bootstrap_servers='localhost:9093',acks=1)
+        producer = KafkaProducer(bootstrap_servers='kafka:9092',acks=1)
         
         # Write the string as bytes because Kafka needs it this way
         producer.send('ingestion-topic', bytes(json_as_string, 'utf-8'))
