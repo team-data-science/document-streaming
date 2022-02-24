@@ -49,7 +49,7 @@ services:
     image: mongo
     volumes:
       - ~/dockerdata/mongodb:/data/db    
-    restart: always
+    restart: on-failure
     ports:
       - "27017:27017"
     environment:
@@ -61,7 +61,7 @@ services:
 
   mongo-express:
     image: mongo-express
-    restart: always
+    restart: on-failure
     ports:
       - "8081:8081"
     environment:
