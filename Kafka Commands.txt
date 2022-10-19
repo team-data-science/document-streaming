@@ -6,7 +6,18 @@
 ./kafka-topics.sh --create --topic spark-output --bootstrap-server localhost:9092
 
 
-
 # Local consumer
 ./kafka-console-consumer.sh --topic ingestion-topic --bootstrap-server localhost:9092
 ./kafka-console-consumer.sh --topic spark-output --bootstrap-server localhost:9092
+
+
+# Local producer 
+./kafka-console-producer.sh --topic ingestion-topic --bootstrap-server localhost:9092
+
+# To test if your Kafka is running correctly:
+1. Connect to the container cli and go to the Kafka directory
+2. Start a local consumer
+3. Connect with a second cli to the container
+4. Start in the second cli a local producer
+5. Type in to the producer cli a message and hit enter
+6. Check if you can see the message in the consumer cli
