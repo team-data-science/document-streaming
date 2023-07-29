@@ -1,7 +1,7 @@
 version: "3"
 services:
   zookeeper:
-    image: 'bitnami/zookeeper::3.7.0-debian-10-r70'
+    image: 'bitnami/zookeeper:3.7.0-debian-10-r70'
     ports:
       - '2181:2181'
     environment:
