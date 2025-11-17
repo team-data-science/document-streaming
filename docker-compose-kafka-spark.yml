@@ -2,7 +2,7 @@ version: "3"
 services:
 
   zookeeper:
-    image: 'bitnami/zookeeper:3.7.0-debian-10-r70'
+    image: 'bitnamilegacy/zookeeper:3.7.0'
     ports:
       - '2181:2181'
     environment:
@@ -11,7 +11,7 @@ services:
       - document-streaming
 
   kafka:
-    image: 'bitnami/kafka:2.8.0-debian-10-r42'
+    image: 'bitnamilegacy/kafka:2.8.0'
     ports:
       - '9093:9093'          #change to 9093 to access external from your windows host
     environment:
